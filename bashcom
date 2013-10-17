@@ -1,0 +1,63 @@
+#!/bin/bash
+
+################################################################
+# 
+#	BashCom
+#	Text family & friends from a terminal - Powered by Twilio
+#	
+#	Made with much love by Zill Christian
+#	MIT License
+#
+#################################################################
+
+
+# Your personal information (Obtain from Twilio)
+export ACCOUNTSID=
+export AUTHTOKEN=
+export CALLERID=
+
+# The path to the addressbook
+export CurrDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export BOOK="${CurrDir}/bashcom_lib/addressbook.txt"
+
+# Init vars
+exit=0
+
+# Hit up that brand
+echo -e "BashCom\n=========\n"
+
+# Display menu
+while [ $exit -ne 1 ]
+do
+	clear
+	echo "Hi there, what would you like to do today?"
+	echo -ne "\t(1) Text someone\n\t(2) Call someone\n\t(3) Add person to address book\n\t(4) List address book\n\t(5) Delete from address book\n\t(0) Exit\n: "
+	read choice
+
+	if [ "$choice" = "1" ]
+	then
+		${CurrDir}/bashcom_lib/text.sh
+	elif [ "$choice" = "2" ]
+	then
+		${CurrDir}/bashcom_lib/call.sh		
+	elif [ "$choice" = "3" ]
+	then
+		${CurrDir}/bashcom_lib/add.sh
+	elif [ "$choice" = "4" ]
+	then
+		${CurrDir}/bashcom_lib/list.sh
+	elif [ "$choice" = "5" ]
+	then
+		${CurrDir}/bashcom_lib/del.sh
+	elif [ "$choice" = "0" ]
+	then
+		# Nothing but style
+		echo -e "\n-- Stay Gold --\n"
+		sleep 1
+		exit=1
+	else
+		echo -e "\nDude, choose a number that is part of the menu...\n"
+		sleep 3
+	fi
+done
+exit 0
