@@ -20,13 +20,13 @@ You are texting and making calls from the freaking terminal..need I say more?<br
 Requirements
 ====================
 **Mac OS X**<br />
-Nothing all all<br />
+Nothing at all :) <br />
 
 **Linux**<br />
-*Perl
-*Curl
+**Perl <br />
+**Curl <br />
 
-**Windows**
-*<a href="https://www.cs.drexel.edu/~kschmidt/Ref/cygwinSetup.html">Cygwin</a>
+**Windows** <br />
+*<a href="https://www.cs.drexel.edu/~kschmidt/Ref/cygwinSetup.html">Cygwin</a> <br />
 
 Along with the platform requirements, you need a (non-sandbox) <a href="www.twilio.com">Twilio account</a>. Yes, this means that you might actually have to drop some money to get some credit but think it this way, each text message is 0.75cents, which is pretty damn cheap! Also, if you want some free credit to play around with, feel free to email Twilio Evangelist, <a href="http://www.jonmarkgo.com/">Jon Gottfried</a>. He's one awesome hacker and a really nice dude that will throw some free credit at you so you can try out the service. <br />
