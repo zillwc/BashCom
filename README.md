@@ -56,6 +56,7 @@ Loads interactive menu:
 ```bash
 Owner-bash$ bashcom
 ```
+<br />
 
 **Advanced Users**<br />
 Text 1112224444 with the message "Hi there":
