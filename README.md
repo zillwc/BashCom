@@ -50,20 +50,20 @@ bash$ sudo ./install_bashcom
 Usage
 ===================
 BashCom is made for both beginners and advanced users. Beginners can use the interactive menu to text, call, and save contacts. Advanced users can text and call using a single line.<br />
-**Beginners**
-Load interactive menu
+**Beginners**<br />
+Loads interactive menu:
 ```bash
 Owner-bash$ bashcom
 ```
 <br />
 
-**Advanced**
-Text 1112224444 with the message "Hi there"
+**Advanced Users**<br />
+Text 1112224444 with the message "Hi there":
 ```bash
 Owner-bash$ bashcom -t -n 1112224444 -m "Hi there"
 ```
 
-Call 1112224444 with the message "Hi there"
+Call 1112224444 with the message "Hi there":
 ```bash
 Owner-bash$ bashcom -c -n 1112224444 -m "Hi there"
 ```
