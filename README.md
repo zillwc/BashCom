@@ -34,4 +34,36 @@ Along with the platform requirements, you need a (non-sandbox) <a href="www.twil
 
 Installation
 ===================
-1. Extract 
+1. Extract all files to a safe location (Documents or whereever you keep stuff that you don't trash)
+2. Open terminal and change directory to this folder
+3. Run command: sudo chmod 755 install_bashcom
+4. Run command: sudo ./install_bashcom
+5. Restart computer
+
+```bash
+bash$ cd /path/to/extracted/folder
+bash$ sudo chmod 755 install_bashcom
+bash$ sudo ./install_bashcom
+```
+
+
+Usage
+===================
+BashCom is made for both beginners and advanced users. Beginners can use the interactive menu to text, call, and save contacts. Advanced users can text and call using a single line.<br />
+**Beginners**
+Load interactive menu
+```bash
+Owner-bash$ bashcom
+```
+<br />
+
+**Advanced**
+Text 1112224444 with the message "Hi there"
+```bash
+Owner-bash$ bashcom -t -n 1112224444 -m "Hi there"
+```
+
+Call 1112224444 with the message "Hi there"
+```bash
+Owner-bash$ bashcom -c -n 1112224444 -m "Hi there"
+```
