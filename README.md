@@ -68,3 +68,13 @@ Call 1112224444 with the message "Hi there":
 ```bash
 Owner-bash$ bashcom -c -n 1112224444 -m "Hi there"
 ```
+
+
+OPTIONS
+===================
+```bash
+-t 	Text
+-c 	Call
+-n 	PhoneNumber
+-m 	Message Body
+```
