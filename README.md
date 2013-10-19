@@ -47,6 +47,20 @@ bash$ sudo ./install_bashcom
 ```
 
 
+OPTIONS
+===================
+```bash
+bashcom
+-t 	Text
+-c 	Call
+-n 	PhoneNumber
+-m 	Message Body
+```
+```bash
+bashcom [[-h][-t][-c] [-n phonenumber] [-m message]]
+```
+
+
 Usage
 ===================
 BashCom is made for both beginners and advanced users. Beginners can use the interactive menu to text, call, and save contacts. Advanced users can text and call using a single line.<br /><br />
@@ -69,16 +83,3 @@ Call 1112224444 with the message "Hi there":
 Owner-bash$ bashcom -c -n 1112224444 -m "Hi there"
 ```
 
-
-OPTIONS
-===================
-```bash
-bashcom
--t 	Text
--c 	Call
--n 	PhoneNumber
--m 	Message Body
-```
-```bash
-bashcom [[-h][-t][-c] [-n phonenumber] [-m message]]
-```
