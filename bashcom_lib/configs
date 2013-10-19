@@ -1,0 +1,39 @@
+################################################################
+# 
+#	BashCom - Config file
+#	Text+Call family & friends from a terminal - Powered by Twilio
+#	
+#	Made with much love by Zill Christian
+#	MIT License
+#
+#################################################################
+
+
+
+#################################################################
+##
+## BashCom - Config file
+##
+## This is where you setup your Twilio Account
+## AccountSID: You obtain this on your Twilio Dashboard Page
+## AuthToken: You obtain this on your Twilio Dashboard Page
+## CallerID: This is the phonenumber you get from Twilio
+##
+## Example:
+##
+## 		ACCOUNTSID=AadCc28df9d24d140c16a93dfb9f52a29a
+## 		AUTHTOKEN=848e1238cfdb2f2dc15b3faa578ac575
+##		CALLERID=555-555-5555
+##
+#################################################################
+
+
+#
+## Set your personal account information here (Obtain from Twilio)
+ACCOUNTSID=
+AUTHTOKEN=
+CALLERID=
+
+export ACCOUNTSID
+export AUTHTOKEN
+export CALLERID

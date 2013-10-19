@@ -81,6 +81,6 @@ echo -n "Sending SMS to $PHONE from $CALLERID..."
 # Initiate a curl request to the Twilio REST API
 RESPONSE=`curl -fSs -u "$ACCOUNTSID:$AUTHTOKEN" -d "From=$CALLERID" -d "To=$PHONE" -d "Body=$MSG" "https://api.twilio.com/2010-04-01/Accounts/$ACCOUNTSID/SMS/Messages" 2>&1`
 if [ $? -gt 0 ]; then echo "Failed to send SMS to $PHONE: $RESPONSE"
-else echo "done.." ; sleep 3
+else echo "done.." ;
 fi
 if [ "$VERBOSE" -eq 1 ]; then echo $RESPONSE; fi

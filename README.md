@@ -27,6 +27,11 @@ Perl <br />
 Curl <br />
 
 **Windows** <br />
-<a href="https://www.cs.drexel.edu/~kschmidt/Ref/cygwinSetup.html">Cygwin</a> <br />
+<a href="https://www.cs.drexel.edu/~kschmidt/Ref/cygwinSetup.html">Cygwin</a> with Curl and Perl packages <br />
 
 Along with the platform requirements, you need a (non-sandbox) <a href="www.twilio.com">Twilio account</a>. Yes, this means that you might actually have to drop some money to get some credit but think it this way, each text message is 0.75cents, which is pretty damn cheap! Also, if you want some free credit to play around with, feel free to email Twilio Evangelist, <a href="http://www.jonmarkgo.com/">Jon Gottfried</a>. He's one awesome hacker and a really nice dude that will throw some free credit at you so you can try out the service. <br />
+
+
+Installation
+===================
+1. Extract 

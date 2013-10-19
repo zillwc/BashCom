@@ -3,7 +3,7 @@
 ################################################################
 # 
 #	BashCom
-#	Text family & friends from a terminal - Powered by Twilio
+#	Text+Call family & friends from a terminal - Powered by Twilio
 #	
 #	Made with much love by Zill Christian
 #	MIT License
@@ -11,22 +11,109 @@
 #################################################################
 
 
-# Your personal information (Obtain from Twilio)
-export ACCOUNTSID=
-export AUTHTOKEN=
-export CALLERID=
 
 # The path to the addressbook
 export CurrDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export BOOK="${CurrDir}/bashcom_lib/addressbook.txt"
+# Import config file
+. ${CurrDir}/bashcom_lib/configs
 
 # Init vars
 exit=0
 
-# Hit up that brand
-echo -e "BashCom\n=========\n"
+# Usage display
+usage()
+{
+	clear
+	echo -e "BashCom\nScript texts and calls family and friends from terminal - Powered by Twilio\n"
+	echo -e "Usage:\n\tbashcom [[-h][-t][-c] [-n phonenumber] [-m message]]\n"
+	echo -e "OPTIONS:\n\t-t\tText Action\n\t-c\tCall Action\n\t-n\tNumber to text or call\n\t-m\tMessage to send\n"
+	echo -e "EXAMPLES:\n\tbashcom\n\tStarts bashcom with the interactive menu"
+	echo -e "\n\tbashcom -t 1113334444 -m \"Hi there\"\n\tSends a text message to 1113334444 with the message \"Hi there\""
+	echo -e "\n\tbashcom -c 1113334444 -m \"Hi there\"\n\tCalls 1113334444 with the message \"Hi there\"\n"
+}
 
-# Display menu
+# Get all the options
+while getopts “htcn:m:” OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         t)
+             TEXT=1
+             ;;
+         c)
+             CALL=1
+             ;;
+         n)
+             PHONE=$OPTARG
+             ;;
+         m)
+             MSG=$OPTARG
+             ;;
+         ?)
+			usage
+			exit=1
+             ;;
+     esac
+done
+
+
+if [[ ! -n "$ACCOUNTSID" ]] && [ "$exit" -ne "1" ]
+then
+	echo -e "\nConfigs have not been set yet.\nPlease set them first in the config file and then run command again.\n"
+	exit=1
+fi
+
+
+# See if the user wants to text
+if [[ -n "$TEXT" ]] && [[ ! -n "$CALL" ]] && [[ -n "$PHONE" ]] && [[ -n "$MSG" ]]
+then
+	# Cut message into 160chars
+    MSG=${MSG:0:160}
+	
+	# Verify MSG and PHONE
+	echo -e "\nNumber: $PHONE\nMessage: $MSG\n"
+	echo -n "Sending SMS to $PHONE from $CALLERID..."
+
+	# Initiate a curl request to the Twilio REST API
+	RESPONSE=`curl -fSs -u "$ACCOUNTSID:$AUTHTOKEN" -d "From=$CALLERID" -d "To=$PHONE" -d "Body=$MSG" "https://api.twilio.com/2010-04-01/Accounts/$ACCOUNTSID/SMS/Messages" 2>&1`
+	if [ $? -gt 0 ]; then echo "Failed to send SMS to $PHONE: $RESPONSE"
+	else echo "done.." ;
+	fi
+
+    exit=1
+fi
+
+# See if the user wants to call
+if [[ ! -n "$TEXT" ]] && [[ -n "$CALL" ]] && [[ -n "$PHONE" ]] && [[ -n "$MSG" ]]
+then
+	# URL encode message using perl
+    MSG=`perl -MURI::Escape -e "print uri_escape(uri_escape('$MSG'));"`
+
+	# Verify MSG and PHONE
+	echo -e "\nNumber: $PHONE\nMessage: $MSG\n"
+	echo -n "Calling $PHONE from $CALLERID..."
+
+	# Initiate a curl request to the Twilio REST API, to begin a phone call to that number
+	RESPONSE=`curl -fSs -u "$ACCOUNTSID:$AUTHTOKEN" -d "Caller=$CALLERID" -d "Called=$PHONE" -d "Url=http://twimlets.com/message?Message=$MSG" "https://api.twilio.com/2008-08-01/Accounts/$ACCOUNTSID/Calls" 2>&1`
+	if [ $? -gt 0 ]; then echo "Failed to call $PHONE: $RESPONSE"
+	else echo "done"
+	fi
+
+    exit=1
+fi
+
+# Preserve the flow
+if [ "$exit" -ne "1" ]
+then
+	# Hit up that brand
+	echo -e "BashCom\n=========\n"
+fi
+
+# Display interactive menu
 while [ $exit -ne 1 ]
 do
 	clear
