@@ -73,8 +73,12 @@ Owner-bash$ bashcom -c -n 1112224444 -m "Hi there"
 OPTIONS
 ===================
 ```bash
+bashcom
 -t 	Text
 -c 	Call
 -n 	PhoneNumber
 -m 	Message Body
+```
+```bash
+bashcom [[-h][-t][-c] [-n phonenumber] [-m message]]
 ```
