@@ -23,12 +23,11 @@
 ##
 ## 		ACCOUNTSID=AadCc28df9d24d140c16a93dfb9f52a29a
 ## 		AUTHTOKEN=848e1238cfdb2f2dc15b3faa578ac575
-##		CALLERID=555-555-5555
+##		 CALLERID=555-555-5555
 ##
 #################################################################
 
 
-#
 ## Set your personal account information here (Obtain from Twilio)
 ACCOUNTSID=
 AUTHTOKEN=
