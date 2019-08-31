@@ -1,152 +1,87 @@
 #!/bin/bash
 
 ################################################################
-# 
-#	BashCom -- install script
-#	Text family & friends from a terminal - Powered by Twilio
-#	
-#	Made with much love by Zill Christian
-#	MIT License
+#
+# BashCom -- install script
+# Text family & friends from a terminal - Powered by Twilio
+#
+# Made with much love by Zill Christian
+# MIT License
 #
 #################################################################
+
+export CurrDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+echo -e "Checking prerequisites --->"
+# Check if awk exists
+if [ ! -x /usr/bin/awk  ];then
+    echo "Error! Awk isn't installed. Aborting.."
+    exit 0
+fi
+
+# Check if grep exists
+if [ ! -x /usr/bin/grep  ];then
+    echo "Error! Grep isn't installed. Aborting.."
+    exit 0
+fi
+
+# Check if perl exists
+if [ ! -x /usr/bin/perl  ];then
+    echo "Error! Perl isn't installed. Aborting.."
+    exit 0
+fi
+
+echo -e "\t- Awk found\n\t- Grep found\n\t- Perl found\n<--- Prerequisites met.."
+sleep 1
 
 # Mac OS X Install
 if [ "$(uname)" == "Darwin" ]; then
 
-	echo -e "\nMac OSX Detected: \n"
-	export CurrDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  echo -e "\nMac OSX Detected: \n"
+  echo -e "\nStarting installation --->"
 
-	echo -e "Checking prerequisites --->"
-	# Check if awk exists
-	if [ ! -x /usr/bin/awk  ];then
-	 echo "Error! Awk isn't installed. Aborting.."
-	 sleep 3
-	 exit 0
-	fi
+  # Changing file permissions
+  echo -e "\t- Changing file permissions"
+  sudo chmod 775 ${CurrDir}/bashcom ${CurrDir}/bashcom_lib/*
+  sleep 1
 
-	# Check if grep exists
-	if [ ! -x /usr/bin/grep  ];then
-	 echo "Error! Grep isn't installed. Aborting.."
-	 sleep 3
-	 exit 0
-	fi
+  # Starting Path addition
+  echo -e "\t- Adding current directory to PATH"
+  pathstr="export PATH=$PATH:$CurrDir"
 
-	# Check if perl exists
-	if [ ! -x /usr/bin/perl  ];then
-	 echo "Error! Perl isn't installed. Aborting.."
-	 sleep 3
-	 exit 0
-	fi
+  # Adding to ~/.bash_profile
+  if [ -f ~/.bash_profile ];
+  then
+    echo -e "\n\n#BashCom Directory Path\n$pathstr\n\n" >> ~/.bash_profile
+    source ~/.bash_profile
+  fi
 
-	echo -e "\t- Awk found\n\t- Grep found\n\t- Perl found\n<--- Prerequisites met.."
-	sleep 1
-
-	echo -e "\nStarting installation --->"
-
-	# Changing file permissions
-	echo -e "\t- Changing file permissions"
-	sudo chmod 775 ${CurrDir}/bashcom ${CurrDir}/bashcom_lib/*
-	sleep 1
-
-
-	# Starting Path addition
-	echo -e "\t- Adding current directory to PATH"
-	pathstr="export PATH=$PATH:$CurrDir"
-
-	# Adding to ~/.bash_profile
-	if [ -f ~/.profile ];
-	then
-		echo -e "\n\n#BashCom Directory Path\n$pathstr\n\n" >> ~/.profile
-	fi
-
-	# Adding to ~/.profile
-	if [ -f /etc/profile ];
-	then
-		echo -e "\n\n#BashCom Directory Path\n$pathstr\n\n" >> /etc/profile
-	fi
-
-	# Exporting direct path for immediate use
-	export PATH=$PATH:$CurrDir
-
-	# Asking for reboot
-	echo -ne "\n<--- Installation complete. You need to restart the computer for script to take effect.\nDo you want to restart your computer now? (y/n)\n: "
-	read answer
-
-	if [[ ("$answer" = "y") || ("$answer" = "Y") ]]
-	then
-		sudo shutdown -r now "Rebooting laptop..."
-	fi
+  # Exporting direct path for immediate use
+  export PATH=$PATH:$CurrDir
 
 # Linux Install
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 
     echo "\nLinux Detected: "
-	export CurrDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-	echo -e "Checking prerequisites --->"
-	# Check if awk exists
-	if [ ! -x /usr/bin/awk  ];then
-	 echo "Error! Awk isn't installed. Aborting.."
-	 sleep 3
-	 exit 0
-	fi
+    echo -e "\nStarting installation --->"
 
-	# Check if grep exists
-	if [ ! -x /usr/bin/grep  ];then
-	 echo "Error! Grep isn't installed. Aborting.."
-	 sleep 3
-	 exit 0
-	fi
-
-	# Check if perl exists
-	if [ ! -x /usr/bin/perl  ];then
-	 echo "Error! Perl isn't installed. Aborting.."
-	 sleep 3
-	 exit 0
-	fi
-
-	echo -e "\t- Awk found\n\t- Grep found\n\t- Perl found\n<--- Prerequisites met.."
-	sleep 1
-
-	echo -e "\nStarting installation --->"
-
-	# Changing file permissions
-	echo "\t- Changing file permissions"
-	sudo chmod 775 ${CurrDir}/bashcom ${CurrDir}/bashcom_lib/*
-	sleep 1
+    # Changing file permissions
+    echo "\t- Changing file permissions"
+    sudo chmod 775 ${CurrDir}/bashcom ${CurrDir}/bashcom_lib/*
+    sleep 1
 
 
-	# Starting Path addition
-	echo "\t- Adding current directory to PATH"
-	pathstr="export PATH=$PATH:$CurrDir"
+    # Starting Path addition
+    echo "\t- Adding current directory to PATH"
+    pathstr="export PATH=$PATH:$CurrDir"
 
-	# Adding to ~/.bash_profile
-	if [ -f ~/.profile ];
-	then
-		echo -e "\n\n#BashCom Directory Path\n$pathstr\n\n" >> ~/.profile
-	fi
+    # Adding to ~/.profile
+    if [ -f ~/.profile ];
+    then
+        echo -e "\n\n#BashCom Directory Path\n$pathstr\n\n" >> ~/.profile
+    fi
 
-	# Adding to ~/.profile
-	if [ -f /etc/profile ];
-	then
-		echo -e "\n\n#BashCom Directory Path\n$pathstr\n\n" >> /etc/profile
-	fi
-
-	# Exporting direct path for immediate use
-	export PATH=$PATH:$CurrDir
-
-	# Installation is compre
-	echo -ne "\n<--- Installation complete. You need to restart the computer for script to take effect.\nDo you want to restart your computer now? (y/n)\n: "
-	read answer
-
-	# Asking for reboot
-	if [[ ("$answer" = "y") || ("$answer" = "Y") ]]
-	then
-		sudo shutdown -r now "Rebooting laptop..."
-	fi
+    # Exporting direct path for immediate use
+    export PATH=$PATH:$CurrDir
 fi
-
-sleep 2
-
-# remove installation file
-sudo rm install_bashcom
